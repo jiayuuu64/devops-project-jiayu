@@ -328,8 +328,13 @@
                 return;
             }
 
-            if (!companyEmail.includes('@') || !companyEmail.includes('.') ) {
+            if (!companyEmail.includes('@') || !companyEmail.includes('.')) {
                 alert("Please enter a valid email.");
+                return;
+            }
+
+            if (salary <= 0) {
+                alert("Salary must be a positive number.");
                 return;
             }
 
