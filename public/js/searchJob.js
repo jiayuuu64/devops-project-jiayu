@@ -1,3 +1,16 @@
+
+
+
+async function loadJobs() {
+    try {
+        const response = await fetch('/view-jobs');
+        const jobs = await response.json();
+        displayJobs(jobs);
+    } catch (error) {
+        console.error('Error fetching jobs:', error);
+    }
+}
+
 async function searchJobs() {
     const keyword = document.getElementById("keyword").value;
     const classification = document.getElementById("classification").value;
@@ -45,4 +58,5 @@ function displayJobs(jobs) {
     });
 }
 
-export { searchJobs, displayJobs };
+
+window.onload = loadJobs;

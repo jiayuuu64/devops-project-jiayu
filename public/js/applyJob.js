@@ -38,4 +38,4 @@ async function submitApplication() {
     }
 }
 
-export { applyJob, submitApplication };
+window.onload = loadJobs;

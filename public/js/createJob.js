@@ -38,4 +38,4 @@ function clearAndCloseModal() {
     $('#resourceModal').modal('hide');
 }
 
-export { addJob, clearAndCloseModal };
+window.onload = loadJobs;

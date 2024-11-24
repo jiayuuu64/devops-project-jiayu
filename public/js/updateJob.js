@@ -16,6 +16,10 @@ async function updateJob(jobId) {
     }
 }
 
+function closeModal() {
+    document.getElementById('updateJobModal').style.display = 'none';
+}
+
 async function submitJobUpdate() {
     const jobId = document.getElementById('jobId').value;
     const jobName = document.getElementById('jobName').value.trim();
@@ -61,8 +65,11 @@ async function submitJobUpdate() {
     }
 }
 
-function closeModal() {
-    document.getElementById('updateJobModal').style.display = 'none';
+window.onclick = function (event) {
+    const modal = document.getElementById('updateJobModal');
+    if (event.target === modal) {
+        closeModal();
+    }
 }
 
-export { updateJob, submitJobUpdate, closeModal };
+window.onload = loadJobs;

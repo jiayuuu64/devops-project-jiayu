@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5050;
  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("./instrumented"));
+app.use(express.static("./public"));
  
 // Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECT)
@@ -17,24 +17,24 @@ mongoose.connect(process.env.DB_CONNECT)
 .catch(err => console.error('Failed to connect to MongoDB', err));
  
 // Import job-related functions
-const { searchJobs } = require('./utils/SearchjobUtil');
+const { searchJobs } = require('./utils/search-job');
 app.get('/search-jobs', searchJobs);
 
-const { addJob } = require('./utils/CreatejobUtil');
+const { addJob } = require('./utils/create-job');
 app.post('/add-job', addJob);
  
-const { editJob, getJobById } = require('./utils/UpdatejobUtil');
+const { editJob, getJobById } = require('./utils/update-job');
 app.put('/edit-job/:id', editJob);
 app.get('/view-job/:id', getJobById);
  
-const { viewJobs } = require('./utils/ViewjobUtil');
+const { viewJobs } = require('./utils/view-job');
 app.get('/view-jobs', viewJobs);
 
-const { applyjob } = require('./utils/ApplyjobUtil');
+const { applyjob } = require('./utils/applyjob');
 app.post('/apply-job/:jobId', applyjob);
  
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/instrumented/index.html");
+    res.sendFile(__dirname + "/public/index.html");
 });
  
 const server = app.listen(PORT, function () {
