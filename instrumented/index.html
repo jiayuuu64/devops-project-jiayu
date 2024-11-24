@@ -152,22 +152,10 @@
     <!-- Scripts for Bootstrap modal functionality -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module">
-        import { searchJobs, displayJobs } from './js/search-job.js';
-        import { updateJob, submitJobUpdate, closeModal } from './js/update-job.js';
-        import { addJob, clearAndCloseModal } from './js/create-job.js';
-        import { applyJob, submitApplication } from './js/apply-job.js';
-
-        // Attach functions to global window for inline event handlers
-        window.searchJobs = searchJobs;
-        window.updateJob = updateJob;
-        window.submitJobUpdate = submitJobUpdate;
-        window.closeModal = closeModal;
-        window.addJob = addJob;
-        window.clearAndCloseModal = clearAndCloseModal;
-        window.applyJob = applyJob;
-        window.submitApplication = submitApplication;
-    </script>
+    <script src="/js/searchJob.js"></script>
+    <script src="/js/updateJob.js"></script>
+    <script src="/js/applyJob.js"></script>
+    <script src="/js/createJob.js"></script>
 </body>
 
 </html>
