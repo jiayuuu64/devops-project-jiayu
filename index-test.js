@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5050;
  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("./public"));
+app.use(express.static("./instrumented"));
  
 // Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECT)
@@ -34,7 +34,7 @@ const { applyjob } = require('./utils/applyjob');
 app.post('/apply-job/:jobId', applyjob);
  
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/public/index.html");
+    res.sendFile(__dirname + "/instrumented/index.html");
 });
  
 const server = app.listen(PORT, function () {
