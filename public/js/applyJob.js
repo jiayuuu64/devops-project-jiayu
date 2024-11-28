@@ -16,7 +16,9 @@ async function submitApplication() {
         return;
     }
 
+ 
     const applicationData = { name, age, education, phone, email };
+ 
 
     try {
         const response = await fetch(`/apply-job/${jobId}`, {

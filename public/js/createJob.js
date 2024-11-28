@@ -6,7 +6,9 @@ async function addJob() {
     const companyEmail = document.getElementById('addCompanyEmail').value;
     const companyName = document.getElementById('addCompanyName').value;
 
+ 
     const jobData = { name, location, description, salary, companyEmail, companyName };
+ 
 
     try {
         const response = await fetch('/add-job', {

@@ -16,9 +16,13 @@ async function updateJob(jobId) {
     }
 }
 
+ 
 function closeModal() {
     document.getElementById('updateJobModal').style.display = 'none';
 }
+ 
+
+
 
 async function submitJobUpdate() {
     const jobId = document.getElementById('jobId').value;
@@ -44,7 +48,9 @@ async function submitJobUpdate() {
         return;
     }
 
+ 
     const jobData = { name: jobName, location, description, salary, companyEmail, companyName };
+ 
 
     try {
         const response = await fetch(`/edit-job/${jobId}`, {

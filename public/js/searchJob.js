@@ -1,6 +1,4 @@
 
-
-
 async function loadJobs() {
     try {
         const response = await fetch('/view-jobs');
@@ -57,6 +55,7 @@ function displayJobs(jobs) {
         jobListings.appendChild(jobCard);
     });
 }
+
 
 
 window.onload = loadJobs;
