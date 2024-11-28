@@ -2,7 +2,7 @@ async function updateJob(jobId) {
     try {
         const response = await fetch(`/view-job/${jobId}`);
         const job = await response.json();
- 
+
         document.getElementById('jobId').value = job._id;
         document.getElementById('jobName').value = job.name;
         document.getElementById('location').value = job.location;
@@ -15,11 +15,15 @@ async function updateJob(jobId) {
         console.error('Error fetching job:', error);
     }
 }
+
  
 function closeModal() {
     document.getElementById('updateJobModal').style.display = 'none';
 }
  
+
+
+
 async function submitJobUpdate() {
     const jobId = document.getElementById('jobId').value;
     const jobName = document.getElementById('jobName').value.trim();
@@ -28,31 +32,33 @@ async function submitJobUpdate() {
     const salary = document.getElementById('salary').value;
     const companyEmail = document.getElementById('companyEmail').value.trim();
     const companyName = document.getElementById('companyName').value.trim();
- 
+
     if (!jobName || !location || !description || !salary || !companyEmail || !companyName) {
         alert("Please fill all fields correctly.");
         return;
     }
- 
+
     if (!companyEmail.includes('@') || !companyEmail.includes('.')) {
         alert("Please enter a valid email.");
         return;
     }
- 
+
     if (salary <= 0) {
         alert("Salary must be a positive number.");
         return;
     }
+
  
     const jobData = { name: jobName, location, description, salary, companyEmail, companyName };
  
+
     try {
         const response = await fetch(`/edit-job/${jobId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(jobData)
         });
- 
+
         if (response.ok) {
             alert('Job updated successfully!');
             closeModal();
@@ -64,12 +70,12 @@ async function submitJobUpdate() {
         console.error('Error updating job:', error);
     }
 }
- 
+
 window.onclick = function (event) {
     const modal = document.getElementById('updateJobModal');
     if (event.target === modal) {
         closeModal();
     }
 }
- 
+
 window.onload = loadJobs;

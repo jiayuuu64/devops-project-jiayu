@@ -5,9 +5,11 @@ async function addJob() {
     const salary = document.getElementById('addSalary').value;
     const companyEmail = document.getElementById('addCompanyEmail').value;
     const companyName = document.getElementById('addCompanyName').value;
+
  
     const jobData = { name, location, description, salary, companyEmail, companyName };
  
+
     try {
         const response = await fetch('/add-job', {
             method: 'POST',
@@ -27,7 +29,7 @@ async function addJob() {
         alert('An error occurred while adding the job.');
     }
 }
- 
+
 function clearAndCloseModal() {
     document.getElementById('addJobName').value = '';
     document.getElementById('addLocation').value = '';
@@ -37,5 +39,5 @@ function clearAndCloseModal() {
     document.getElementById('addCompanyName').value = '';
     $('#resourceModal').modal('hide');
 }
- 
+
 window.onload = loadJobs;
