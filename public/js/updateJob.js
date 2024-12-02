@@ -96,13 +96,11 @@ async function submitJobUpdate() {
             }, 1500); // 1.5 seconds delay ensures visibility
         } else {
             // Handle response error
-            const errorData = await response.json().catch(() => ({})); // Safely handle invalid JSON
-            displayError(errorData.message || 'Error updating job: Server returned an unknown error');
-            console.error('Server error while updating job:', errorData);
+            displayError(errorData.message);
         }
     } catch (error) {
         // Handle unexpected errors
-        displayError('Error updating job: ' + (error.message || 'Unknown error occurred'));
+        displayError('Error updating job: ' + (error.message));
         console.error('Unexpected error while updating job:', error);
     }
 
