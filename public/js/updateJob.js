@@ -21,27 +21,23 @@ async function updateJob(jobId) {
         document.getElementById('updateJobModal').style.display = 'block';
     } catch (error) {
         console.error('Error fetching job:', error);
-        displayError('Error fetching job details.');
+        displayMessage('Error fetching job details.', 'error');
     }
 }
+
 function closeModal() {
     const modal = document.getElementById('updateJobModal');
     modal.style.display = 'none'; // Hide the modal
 }
 
-
-function displayError(message) {
-    const errorMessageElement = document.getElementById('error-message');
-    errorMessageElement.textContent = message;
-    errorMessageElement.style.display = 'block';
-    console.log('Displayed error message:', message);
-}
-
-function displaySuccess(message) {
-    const successMessageElement = document.getElementById('success-message');
-    successMessageElement.textContent = message;
-    successMessageElement.style.display = 'block'; // Make the message visible
-    console.log('Displayed success message:', message);
+function displayMessage(message, type) {
+    // Show success or error message in a simple prompt (alert)
+    if (type === 'error') {
+        alert('Error: ' + message); // Display error message in an alert
+    } else if (type === 'success') {
+        alert('Success: ' + message); // Display success message in an alert
+    }
+    console.log(type === 'error' ? 'Displayed error message' : 'Displayed success message:', message);
 }
 
 async function submitJobUpdate() {
@@ -53,26 +49,19 @@ async function submitJobUpdate() {
     const companyEmail = document.getElementById('companyEmail').value.trim();
     const companyName = document.getElementById('companyName').value.trim();
 
-    const errorMessageElement = document.getElementById('error-message');
-    const successMessageElement = document.getElementById('success-message');
-
-    // Reset messages
-    errorMessageElement.style.display = 'none';
-    successMessageElement.style.display = 'none';
-
     // Validation checks
     if (!jobName || !location || !description || !salary || !companyEmail || !companyName) {
-        displayError('Please fill all fields correctly.');
+        displayMessage('Please fill all fields correctly.', 'error');
         return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(companyEmail)) {
-        displayError('Please enter a valid email format.');
+        displayMessage('Please enter a valid email format.', 'error');
         return;
     }
 
     if (isNaN(salary) || Number(salary) <= 0) {
-        displayError('Salary must be a valid positive number.');
+        displayMessage('Salary must be a valid positive number.', 'error');
         return;
     }
 
@@ -84,29 +73,25 @@ async function submitJobUpdate() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(jobData),
         });
-    
+
         if (response.ok) {
-            displaySuccess('Job updated successfully!');
+            displayMessage('Job updated successfully!', 'success');
             console.log('Job update succeeded.');
-    
+
             // Delay closing the modal and reloading jobs
             setTimeout(() => {
                 closeModal();
                 loadJobs(); // Reload job listings
             }, 1500); // 1.5 seconds delay ensures visibility
         } else {
-            // Handle response error
-            displayError(errorData.message);
+            const errorData = await response.json();
+            displayMessage(errorData.message || 'Error updating job', 'error');
         }
     } catch (error) {
-        // Handle unexpected errors
-        displayError('Error updating job: ' + (error.message));
+        displayMessage('Error updating job: ' + (error.message || 'Unknown error occurred'), 'error');
         console.error('Unexpected error while updating job:', error);
     }
-
 }
-
-
 
 window.onclick = function (event) {
     const modal = document.getElementById('updateJobModal');
