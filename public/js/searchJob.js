@@ -1,3 +1,4 @@
+
 async function loadJobs() {
     try {
         const response = await fetch('/view-jobs');
@@ -7,12 +8,12 @@ async function loadJobs() {
         console.error('Error fetching jobs:', error);
     }
 }
- 
+
 async function searchJobs() {
     const keyword = document.getElementById("keyword").value;
     const classification = document.getElementById("classification").value;
     const query = new URLSearchParams({ keyword, classification }).toString();
- 
+
     try {
         const response = await fetch(`/search-jobs?${query}`, { method: "GET" });
         if (response.ok) {
@@ -25,7 +26,7 @@ async function searchJobs() {
         console.error("Error searching jobs:", error);
     }
 }
- 
+
 function displayJobs(jobs) {
     const jobListings = document.getElementById('job-listings');
     jobListings.innerHTML = '';
@@ -33,7 +34,7 @@ function displayJobs(jobs) {
         jobListings.innerHTML = '<p>No job listings found.</p>';
         return;
     }
- 
+
     jobs.forEach(job => {
         const jobCard = document.createElement('div');
         jobCard.classList.add('job-listing');
@@ -54,7 +55,7 @@ function displayJobs(jobs) {
         jobListings.appendChild(jobCard);
     });
 }
- 
- 
+
+
+
 window.onload = loadJobs;
- 

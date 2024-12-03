@@ -1,3 +1,8 @@
+
 node_modules
 
-package-lock.json
+# Ignore NYC output
+.nyc_output/
+# Ignore coverage folder
+coverage/
+
