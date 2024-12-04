@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1733310372551" clover="3.2.0">
-  <project timestamp="1733310372552" name="All files">
-    <metrics statements="129" coveredstatements="68" conditionals="45" coveredconditionals="28" methods="14" coveredmethods="8" elements="188" coveredelements="104" complexity="0" loc="129" ncloc="129" packages="1" files="4" classes="4"/>
+<coverage generated="1733328428557" clover="3.2.0">
+  <project timestamp="1733328428557" name="All files">
+    <metrics statements="129" coveredstatements="67" conditionals="45" coveredconditionals="28" methods="14" coveredmethods="8" elements="188" coveredelements="103" complexity="0" loc="129" ncloc="129" packages="1" files="4" classes="4"/>
     <file name="applyJob.js" path="C:\07_P02\devops-project\devops-project-jiayu\public\js\applyJob.js">
       <metrics statements="22" coveredstatements="1" conditionals="9" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <line num="2" count="0" type="stmt"/>
@@ -56,12 +56,12 @@
       <line num="43" count="10" type="stmt"/>
     </file>
     <file name="searchJob.js" path="C:\07_P02\devops-project\devops-project-jiayu\public\js\searchJob.js">
-      <metrics statements="26" coveredstatements="14" conditionals="4" coveredconditionals="1" methods="4" coveredmethods="3"/>
+      <metrics statements="26" coveredstatements="13" conditionals="4" coveredconditionals="1" methods="4" coveredmethods="3"/>
       <line num="3" count="10" type="stmt"/>
       <line num="4" count="10" type="stmt"/>
-      <line num="5" count="9" type="stmt"/>
-      <line num="6" count="9" type="stmt"/>
-      <line num="8" count="1" type="stmt"/>
+      <line num="5" count="10" type="stmt"/>
+      <line num="6" count="10" type="stmt"/>
+      <line num="8" count="0" type="stmt"/>
       <line num="13" count="0" type="stmt"/>
       <line num="14" count="0" type="stmt"/>
       <line num="15" count="0" type="stmt"/>
@@ -72,16 +72,16 @@
       <line num="21" count="0" type="stmt"/>
       <line num="23" count="0" type="stmt"/>
       <line num="26" count="0" type="stmt"/>
-      <line num="31" count="9" type="stmt"/>
-      <line num="32" count="9" type="stmt"/>
-      <line num="33" count="9" type="cond" truecount="1" falsecount="1"/>
+      <line num="31" count="10" type="stmt"/>
+      <line num="32" count="10" type="stmt"/>
+      <line num="33" count="10" type="cond" truecount="1" falsecount="1"/>
       <line num="34" count="0" type="stmt"/>
       <line num="35" count="0" type="stmt"/>
-      <line num="38" count="9" type="stmt"/>
-      <line num="39" count="90" type="stmt"/>
-      <line num="40" count="90" type="stmt"/>
-      <line num="41" count="90" type="stmt"/>
-      <line num="55" count="90" type="stmt"/>
+      <line num="38" count="10" type="stmt"/>
+      <line num="39" count="10" type="stmt"/>
+      <line num="40" count="10" type="stmt"/>
+      <line num="41" count="10" type="stmt"/>
+      <line num="55" count="10" type="stmt"/>
       <line num="61" count="10" type="stmt"/>
     </file>
     <file name="updateJob.js" path="C:\07_P02\devops-project\devops-project-jiayu\public\js\updateJob.js">

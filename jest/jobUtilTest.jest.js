@@ -29,8 +29,6 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-    // Clean up after all tests and close the server
-    await Job.deleteMany({});
     server.close(() => console.log('Server closed after tests.'));
 });
 

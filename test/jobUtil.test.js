@@ -37,7 +37,6 @@ describe('Job API', () => {
     });
 
     after(async () => {
-        await Job.deleteMany({});
         server.close(() => console.log('Server closed after tests.'));
     });
 
