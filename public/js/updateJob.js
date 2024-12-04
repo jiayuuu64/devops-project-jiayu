@@ -21,7 +21,7 @@ async function updateJob(jobId) {
         document.getElementById('updateJobModal').style.display = 'block';
     } catch (error) {
         console.error('Error fetching job:', error);
-        displayMessage('Error fetching job details.', 'error');
+        displayMessage('Error fetching job details.', 'error');  // Trigger error message
     }
 }
 
@@ -31,11 +31,11 @@ function closeModal() {
 }
 
 function displayMessage(message, type) {
-    // Show success or error message in a simple prompt (alert)
+    // This function uses alert() to show the message, and it will be tested with Cypress
     if (type === 'error') {
-        alert('Error: ' + message); // Display error message in an alert
+        alert('Error: ' + message); // Trigger error message with alert
     } else if (type === 'success') {
-        alert('Success: ' + message); // Display success message in an alert
+        alert('Success: ' + message); // Trigger success message with alert
     }
     console.log(type === 'error' ? 'Displayed error message' : 'Displayed success message:', message);
 }
@@ -51,17 +51,17 @@ async function submitJobUpdate() {
 
     // Validation checks
     if (!jobName || !location || !description || !salary || !companyEmail || !companyName) {
-        displayMessage('Please fill all fields correctly.', 'error');
+        displayMessage('Please fill all fields correctly.', 'error');  // Trigger error message
         return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(companyEmail)) {
-        displayMessage('Please enter a valid email format.', 'error');
+        displayMessage('Please enter a valid email format.', 'error');  // Trigger error message
         return;
     }
 
     if (isNaN(salary) || Number(salary) <= 0) {
-        displayMessage('Salary must be a valid positive number.', 'error');
+        displayMessage('Salary must be a valid positive number.', 'error');  // Trigger error message
         return;
     }
 
@@ -75,7 +75,7 @@ async function submitJobUpdate() {
         });
 
         if (response.ok) {
-            displayMessage('Job updated successfully!', 'success');
+            displayMessage('Job updated successfully!', 'success');  // Trigger success message
             console.log('Job update succeeded.');
 
             // Delay closing the modal and reloading jobs
@@ -85,10 +85,10 @@ async function submitJobUpdate() {
             }, 1500); // 1.5 seconds delay ensures visibility
         } else {
             const errorData = await response.json();
-            displayMessage(errorData.message || 'Error updating job', 'error');
+            displayMessage(errorData.message || 'Error updating job', 'error');  // Trigger error message
         }
     } catch (error) {
-        displayMessage('Error updating job: ' + (error.message || 'Unknown error occurred'), 'error');
+        displayMessage('Error updating job: ' + (error.message || 'Unknown error occurred'), 'error');  // Trigger error message
         console.error('Unexpected error while updating job:', error);
     }
 }
