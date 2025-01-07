@@ -93,7 +93,7 @@ FNH:3
 FNDA:10,loadJobs
 FNDA:0,searchJobs
 FNDA:10,displayJobs
-FNDA:10,(anonymous_3)
+FNDA:20,(anonymous_3)
 DA:3,10
 DA:4,10
 DA:5,10
@@ -115,10 +115,10 @@ DA:33,10
 DA:34,0
 DA:35,0
 DA:38,10
-DA:39,10
-DA:40,10
-DA:41,10
-DA:55,10
+DA:39,20
+DA:40,20
+DA:41,20
+DA:55,20
 DA:61,10
 LF:26
 LH:13

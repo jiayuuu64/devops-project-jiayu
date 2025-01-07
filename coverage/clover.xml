@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1733328428557" clover="3.2.0">
-  <project timestamp="1733328428557" name="All files">
+<coverage generated="1733383558657" clover="3.2.0">
+  <project timestamp="1733383558657" name="All files">
     <metrics statements="129" coveredstatements="67" conditionals="45" coveredconditionals="28" methods="14" coveredmethods="8" elements="188" coveredelements="103" complexity="0" loc="129" ncloc="129" packages="1" files="4" classes="4"/>
-    <file name="applyJob.js" path="C:\07_P02\devops-project\devops-project-jiayu\public\js\applyJob.js">
+    <file name="applyJob.js" path="C:\DVOPS Part 2\devops-project-jiayu\public\js\applyJob.js">
       <metrics statements="22" coveredstatements="1" conditionals="9" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <line num="2" count="0" type="stmt"/>
       <line num="3" count="0" type="stmt"/>
@@ -27,7 +27,7 @@
       <line num="39" count="0" type="stmt"/>
       <line num="43" count="10" type="stmt"/>
     </file>
-    <file name="createJob.js" path="C:\07_P02\devops-project\devops-project-jiayu\public\js\createJob.js">
+    <file name="createJob.js" path="C:\DVOPS Part 2\devops-project-jiayu\public\js\createJob.js">
       <metrics statements="25" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <line num="2" count="0" type="stmt"/>
       <line num="3" count="0" type="stmt"/>
@@ -55,7 +55,7 @@
       <line num="40" count="0" type="stmt"/>
       <line num="43" count="10" type="stmt"/>
     </file>
-    <file name="searchJob.js" path="C:\07_P02\devops-project\devops-project-jiayu\public\js\searchJob.js">
+    <file name="searchJob.js" path="C:\DVOPS Part 2\devops-project-jiayu\public\js\searchJob.js">
       <metrics statements="26" coveredstatements="13" conditionals="4" coveredconditionals="1" methods="4" coveredmethods="3"/>
       <line num="3" count="10" type="stmt"/>
       <line num="4" count="10" type="stmt"/>
@@ -78,13 +78,13 @@
       <line num="34" count="0" type="stmt"/>
       <line num="35" count="0" type="stmt"/>
       <line num="38" count="10" type="stmt"/>
-      <line num="39" count="10" type="stmt"/>
-      <line num="40" count="10" type="stmt"/>
-      <line num="41" count="10" type="stmt"/>
-      <line num="55" count="10" type="stmt"/>
+      <line num="39" count="20" type="stmt"/>
+      <line num="40" count="20" type="stmt"/>
+      <line num="41" count="20" type="stmt"/>
+      <line num="55" count="20" type="stmt"/>
       <line num="61" count="10" type="stmt"/>
     </file>
-    <file name="updateJob.js" path="C:\07_P02\devops-project\devops-project-jiayu\public\js\updateJob.js">
+    <file name="updateJob.js" path="C:\DVOPS Part 2\devops-project-jiayu\public\js\updateJob.js">
       <metrics statements="56" coveredstatements="52" conditionals="30" coveredconditionals="27" methods="6" coveredmethods="5"/>
       <line num="2" count="9" type="stmt"/>
       <line num="3" count="9" type="stmt"/>
