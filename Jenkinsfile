@@ -62,7 +62,7 @@ pipeline {
         stage('Azure AKS Cluster Setup') {
             steps {
                 bat '''
-                    az aks show --resource-group rmsJobGroup --name rmsAKSCluster -o json >nul 2>nul || az aks create --resource-group rmsJobGroup --name btAKSCluster --node-count 1 --generate-ssh-keys 2>&1
+                    az aks show --resource-group rmsJobGroup --name rmsAKSCluster -o json >nul 2>nul || az aks create --resource-group rmsJobGroup --name rmsAKSCluster --node-count 1 --generate-ssh-keys 2>&1
                 '''
             }
         }
@@ -84,15 +84,15 @@ pipeline {
         stage('Apply Kubernetes Deployment and Service') {
             steps {
                 bat '''
-                    kubectl apply -f bt-deployment.yaml
-                    kubectl apply -f bt-service.yaml
+                    kubectl apply -f rms-deployment.yaml
+                    kubectl apply -f rms-service.yaml
                 '''
             }
         }
         stage('Verify Kubernetes Deployment') {
             steps {
                 bat '''
-                    kubectl rollout history deployment/bt-deployment
+                    kubectl rollout history deployment/rms-deployment
                     kubectl get pods
                     kubectl get services
                 '''
