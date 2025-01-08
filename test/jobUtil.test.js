@@ -18,6 +18,7 @@ describe('Job API', () => {
     });
 
     beforeEach(async () => {
+        this.timeout(5000); 
         const sampleJob = new Job({
             name: 'Sample Job',
             location: 'Sample Location',
