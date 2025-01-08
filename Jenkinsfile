@@ -40,7 +40,7 @@ pipeline {
         stage('Docker Login, Compose, Build and Push') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    withCredentials([usernamePassword(credentialsId: 'bd124c49-6eb7-40f2-81ac-c7c607762adf', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         bat '''
                             docker login -u %DOCKER_USER% -p %DOCKER_PASS%
                             docker-compose build
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        usernamePassword(credentialsId: 'azure-credentials-id', usernameVariable: 'APP_ID', passwordVariable: 'PASSWORD'),
+                        usernamePassword(credentialsId: '5aa936a1-70b9-49eb-89c9-e8cdbe52c14f', usernameVariable: 'APP_ID', passwordVariable: 'PASSWORD'),
                         string(credentialsId: 'tenant-id', variable: 'TENANT')
                     ]) {
                         bat '''
@@ -74,7 +74,7 @@ pipeline {
         stage('Get AKS Cluster Credentials') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'subscription-id', variable: 'SUBSCRIPTION_ID')]) {
+                    withCredentials([string(credentialsId: 'aeedb859-2ae2-451a-91e5-ac4dc88c0b8b', variable: 'SUBSCRIPTION_ID')]) {
                         bat '''
                             az aks get-credentials --resource-group "rmsJobGroup" --name "rmsAKSCluster" --overwrite-existing --subscription %SUBSCRIPTION_ID%
                         '''
