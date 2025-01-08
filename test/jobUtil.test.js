@@ -18,8 +18,6 @@ describe('Job API', () => {
     });
 
     beforeEach(async () => {
-        // Clear database and re-seed with sample job
-        await Job.deleteMany({});
         const sampleJob = new Job({
             name: 'Sample Job',
             location: 'Sample Location',

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1736249613036" clover="3.2.0">
-  <project timestamp="1736249613037" name="All files">
-    <metrics statements="129" coveredstatements="67" conditionals="45" coveredconditionals="28" methods="14" coveredmethods="8" elements="188" coveredelements="103" complexity="0" loc="129" ncloc="129" packages="1" files="4" classes="4"/>
+<coverage generated="1736323778115" clover="3.2.0">
+  <project timestamp="1736323778115" name="All files">
+    <metrics statements="129" coveredstatements="70" conditionals="45" coveredconditionals="29" methods="14" coveredmethods="8" elements="188" coveredelements="107" complexity="0" loc="129" ncloc="129" packages="1" files="4" classes="4"/>
     <file name="applyJob.js" path="C:\DVOPS Part 2\devops-project-jiayu\public\js\applyJob.js">
       <metrics statements="22" coveredstatements="1" conditionals="9" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <line num="2" count="0" type="stmt"/>
@@ -56,12 +56,12 @@
       <line num="43" count="10" type="stmt"/>
     </file>
     <file name="searchJob.js" path="C:\DVOPS Part 2\devops-project-jiayu\public\js\searchJob.js">
-      <metrics statements="26" coveredstatements="13" conditionals="4" coveredconditionals="1" methods="4" coveredmethods="3"/>
+      <metrics statements="26" coveredstatements="14" conditionals="4" coveredconditionals="1" methods="4" coveredmethods="3"/>
       <line num="3" count="10" type="stmt"/>
       <line num="4" count="10" type="stmt"/>
-      <line num="5" count="10" type="stmt"/>
-      <line num="6" count="10" type="stmt"/>
-      <line num="8" count="0" type="stmt"/>
+      <line num="5" count="9" type="stmt"/>
+      <line num="6" count="9" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
       <line num="13" count="0" type="stmt"/>
       <line num="14" count="0" type="stmt"/>
       <line num="15" count="0" type="stmt"/>
@@ -72,20 +72,20 @@
       <line num="21" count="0" type="stmt"/>
       <line num="23" count="0" type="stmt"/>
       <line num="26" count="0" type="stmt"/>
-      <line num="31" count="10" type="stmt"/>
-      <line num="32" count="10" type="stmt"/>
-      <line num="33" count="10" type="cond" truecount="1" falsecount="1"/>
+      <line num="31" count="9" type="stmt"/>
+      <line num="32" count="9" type="stmt"/>
+      <line num="33" count="9" type="cond" truecount="1" falsecount="1"/>
       <line num="34" count="0" type="stmt"/>
       <line num="35" count="0" type="stmt"/>
-      <line num="38" count="10" type="stmt"/>
-      <line num="39" count="10" type="stmt"/>
-      <line num="40" count="10" type="stmt"/>
-      <line num="41" count="10" type="stmt"/>
-      <line num="55" count="10" type="stmt"/>
+      <line num="38" count="9" type="stmt"/>
+      <line num="39" count="207" type="stmt"/>
+      <line num="40" count="207" type="stmt"/>
+      <line num="41" count="207" type="stmt"/>
+      <line num="55" count="207" type="stmt"/>
       <line num="61" count="10" type="stmt"/>
     </file>
     <file name="updateJob.js" path="C:\DVOPS Part 2\devops-project-jiayu\public\js\updateJob.js">
-      <metrics statements="56" coveredstatements="52" conditionals="30" coveredconditionals="27" methods="6" coveredmethods="5"/>
+      <metrics statements="56" coveredstatements="54" conditionals="30" coveredconditionals="28" methods="6" coveredmethods="5"/>
       <line num="2" count="9" type="stmt"/>
       <line num="3" count="9" type="stmt"/>
       <line num="5" count="9" type="cond" truecount="2" falsecount="0"/>
@@ -103,11 +103,11 @@
       <line num="24" count="1" type="stmt"/>
       <line num="29" count="1" type="stmt"/>
       <line num="30" count="1" type="stmt"/>
-      <line num="35" count="7" type="cond" truecount="2" falsecount="0"/>
-      <line num="36" count="6" type="stmt"/>
+      <line num="35" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="36" count="7" type="stmt"/>
       <line num="37" count="1" type="cond" truecount="1" falsecount="1"/>
       <line num="38" count="1" type="stmt"/>
-      <line num="40" count="7" type="cond" truecount="2" falsecount="0"/>
+      <line num="40" count="8" type="cond" truecount="2" falsecount="0"/>
       <line num="44" count="7" type="stmt"/>
       <line num="45" count="7" type="stmt"/>
       <line num="46" count="7" type="stmt"/>
@@ -135,8 +135,8 @@
       <line num="84" count="0" type="stmt"/>
       <line num="87" count="2" type="stmt"/>
       <line num="88" count="2" type="cond" truecount="2" falsecount="0"/>
-      <line num="91" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="92" count="0" type="stmt"/>
+      <line num="91" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="92" count="1" type="stmt"/>
       <line num="96" count="10" type="stmt"/>
       <line num="97" count="49" type="stmt"/>
       <line num="98" count="49" type="cond" truecount="2" falsecount="0"/>
