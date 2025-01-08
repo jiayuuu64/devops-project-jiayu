@@ -18,6 +18,7 @@ describe('Job API', () => {
     });
 
     beforeEach(async () => {
+        this.timeout(5000);
         // Clear database and re-seed with sample job
         await Job.deleteMany({});
         const sampleJob = new Job({
