@@ -1,21 +1,27 @@
 pipeline {
     agent any
+    environment {
+        PATH = "${env.PATH};C:\\Program Files\\Docker\\Docker\\resources\\bin" // Ensure Docker is accessible
+    }
     stages {
         stage('Clone Repository') {
             steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    userRemoteConfigs: [[
-                        url: 'https://github.com/jiayuuu64/devops-project-jiayu',
-                        credentialsId: 'bf8f9e76-ef23-4c2c-8a05-9893c7c69ded'
-                    ]]
-                ])
+                checkout scm
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                bat '''
+                    npm install
+                '''
             }
         }
         stage('Run Backend Mocha Tests') {
             steps {
-                bat 'npm run backend-test'
+                bat '''
+                    npm install sinon --save-dev
+                    npm run backend-test
+                '''
             }
         }
         stage('Run Frontend Instrumentation') {
@@ -31,10 +37,9 @@ pipeline {
         stage('Docker Login, Compose, Build and Push') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'bd124c49-6eb7-40f2-81ac-c7c607762adf', usernameVariable: 'Docker_Username',
-                    passwordVariable: 'Docker_Password')]) {
+                    withCredentials([usernamePassword(credentialsId: 'bd124c49-6eb7-40f2-81ac-c7c607762adf', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         bat '''
-                            docker login -u %Docker_Username% -p %Docker_Password%
+                            docker login -u %DOCKER_USER% -p %DOCKER_PASS%
                             docker-compose build
                             docker-compose push
                         '''
@@ -46,15 +51,12 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        usernamePassword(credentialsId: '5aa936a1-70b9-49eb-89c9-e8cdbe52c14f', usernameVariable: 'appId',
-                        passwordVariable: 'password'),
-                        string(credentialsId: '21c737b7-0b84-48ec-a4bd-b44e2a8bd10c', variable: 'Tenant')
+                        usernamePassword(credentialsId: '5aa936a1-70b9-49eb-89c9-e8cdbe52c14f', usernameVariable: 'APP_ID', passwordVariable: 'PASSWORD'),
+                        string(credentialsId: '21c737b7-0b84-48ec-a4bd-b44e2a8bd10c', variable: 'TENANT')
                     ]) {
-                        try {
-                            bat 'az login --service-principal -u %appId% -p %password% --tenant %Tenant%'
-                        } catch (Exception e) {
-                            error "Azure login failed: ${e.message}"
-                        }
+                        bat '''
+                            az login --service-principal -u %APP_ID% -p %PASSWORD% --tenant %TENANT%
+                        '''
                     }
                 }
             }
@@ -62,21 +64,17 @@ pipeline {
         stage('Azure AKS Cluster Setup') {
             steps {
                 bat '''
-                    az aks show --resource-group rmsJobGroup --name rmsAKSCluster -o json >nul 2>nul || az aks create --resource-group rmsJobGroup --name rmsAKSCluster --node-count 1 --generate-ssh-keys 2>&1
+                    az aks show --resource-group rmsJobGroup --name rmsAKSCluster -o json >nul 2>nul || az aks create --resource-group rmsJobGroup --name rmsAKSCluster --node-count 1 --generate-ssh-keys
                 '''
             }
         }
         stage('Get AKS Cluster Credentials') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'aeedb859-2ae2-451a-91e5-ac4dc88c0b8b', variable: 'Subscription_id')]) {
-                        try {
-                            bat '''
-                                az aks get-credentials --resource-group "rmsJobGroup" --name "rmsAKSCluster" --overwrite-existing --subscription %Subscription_id%
-                            '''
-                        } catch (Exception e) {
-                            error "Get AKS Cluster Credentials failed: ${e.message}"
-                        }
+                    withCredentials([string(credentialsId: 'aeedb859-2ae2-451a-91e5-ac4dc88c0b8b', variable: 'SUBSCRIPTION_ID')]) {
+                        bat '''
+                            az aks get-credentials --resource-group "rmsJobGroup" --name "rmsAKSCluster" --overwrite-existing --subscription %SUBSCRIPTION_ID%
+                        '''
                     }
                 }
             }
@@ -99,30 +97,22 @@ pipeline {
             }
         }
     }
- 
+
     post {
         always {
             echo 'This will always run'
         }
         failure {
-            script {
-                def consoleOutput = currentBuild.rawBuild.log(10).join("\n")
-                mail bcc: '',
-                     body: """
-                         <b>Build Failed!</b><br>
-                         <b>Project:</b> ${env.JOB_NAME}<br>
-                         <b>Build Number:</b> ${env.BUILD_NUMBER}<br>
-                         <b>Console Snippet:</b><br><pre>${consoleOutput}</pre><br>
-                         <b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a>
-                     """,
-                     cc: '',
-                     charset: 'UTF-8',
-                     from: '',
-                     mimeType: 'text/html',
-                     replyTo: '',
-                     subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${consoleOutput}",
-                     to: 'jiayu.wong42@gmail.com'
-            }
+            mail bcc: '',
+                 body: """
+                     <b>Build Failed!</b><br>
+                     <b>Project:</b> ${env.JOB_NAME}<br>
+                     <b>Build Number:</b> ${env.BUILD_NUMBER}<br>
+                     <b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a>
+                 """,
+                 mimeType: 'text/html',
+                 subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 to: 'jiayu.wong42@gmail.com'
         }
     }
 }
