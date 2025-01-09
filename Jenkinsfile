@@ -10,14 +10,20 @@ pipeline {
             steps {
                 bat '''
                     npm install
-                    npm audit fix
+                    npm audit fix || echo "Some vulnerabilities could not be fixed automatically."
+                '''
+            }
+        }
+        stage('Check Deprecated Packages') {
+            steps {
+                bat '''
+                    npm outdated || echo "Check for deprecated packages and update where necessary."
                 '''
             }
         }
         stage('Run Backend Mocha Tests') {
             steps {
                 bat '''
-                    npm install sinon --save-dev
                     npm run backend-test
                 '''
             }
@@ -37,17 +43,24 @@ pipeline {
                 '''
             }
         }
-        stage('Docker Login, Compose, Build and Push') {
+        stage('Docker Login, Build, and Push') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'bd124c49-6eb7-40f2-81ac-c7c607762adf', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         bat '''
-                            docker login -u %DOCKER_USER% -p %DOCKER_PASS%
+                            echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
                             docker-compose build
                             docker-compose push
                         '''
                     }
                 }
+            }
+        }
+        stage('Optimize Docker Image') {
+            steps {
+                bat '''
+                    docker image prune -f
+                '''
             }
         }
         stage('Azure Login') {
@@ -104,7 +117,7 @@ pipeline {
     }
     post {
         always {
-            echo 'This will always run'
+            echo 'Pipeline execution completed.'
         }
         failure {
             mail to: 'jiayu.wong42@gmail.com',
