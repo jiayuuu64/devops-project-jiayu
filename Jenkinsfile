@@ -10,14 +10,16 @@ pipeline {
             steps {
                 bat '''
                     npm install
-                    npm audit fix || echo "Some vulnerabilities could not be fixed automatically."
+                    npm audit fix || echo "Some vulnerabilities could not be fixed automatically. Proceeding with caution."
                 '''
             }
         }
-        stage('Check Deprecated Packages') {
+        stage('Update Outdated Packages') {
             steps {
                 bat '''
-                    npm outdated || echo "Check for deprecated packages and update where necessary."
+                    npm install -g npm-check-updates
+                    ncu -u
+                    npm install
                 '''
             }
         }
@@ -56,13 +58,6 @@ pipeline {
                 }
             }
         }
-        stage('Optimize Docker Image') {
-            steps {
-                bat '''
-                    docker image prune -f
-                '''
-            }
-        }
         stage('Azure Login') {
             steps {
                 script {
@@ -72,26 +67,6 @@ pipeline {
                     ]) {
                         bat '''
                             az login --service-principal -u %APP_ID% -p %PASSWORD% --tenant %TENANT%
-                        '''
-                    }
-                }
-            }
-        }
-        stage('Azure AKS Cluster Setup') {
-            steps {
-                bat '''
-                    az aks show --resource-group rmsJobGroup --name rmsAKSCluster -o json >nul 2>nul || az aks create --resource-group rmsJobGroup --name rmsAKSCluster --node-count 1 --generate-ssh-keys
-                '''
-            }
-        }
-        stage('Get AKS Cluster Credentials') {
-            steps {
-                script {
-                    withCredentials([
-                        string(credentialsId: 'aeedb859-2ae2-451a-91e5-ac4dc88c0b8b', variable: 'SUBSCRIPTION_ID')
-                    ]) {
-                        bat '''
-                            az aks get-credentials --resource-group "rmsJobGroup" --name "rmsAKSCluster" --overwrite-existing --subscription %SUBSCRIPTION_ID%
                         '''
                     }
                 }
