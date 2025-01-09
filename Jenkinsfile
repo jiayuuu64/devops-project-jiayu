@@ -25,7 +25,7 @@ pipeline {
         stage('Run Frontend Instrumentation') {
             steps {
                 bat '''
-                    nyc instrument public instrumented
+                    npx nyc instrument public instrumented
                 '''
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 bat '''
                     set ELECTRON_DISABLE_GPU=1
-                    cypress run --browser chrome
+                    npx cypress run --browser chrome
                 '''
             }
         }
@@ -55,7 +55,7 @@ pipeline {
                 script {
                     withCredentials([
                         usernamePassword(credentialsId: '5aa936a1-70b9-49eb-89c9-e8cdbe52c14f', usernameVariable: 'APP_ID', passwordVariable: 'PASSWORD'),
-                        string(credentialsId: 'tenant-id', variable: 'TENANT')
+                        string(credentialsId: '21c737b7-0b84-48ec-a4bd-b44e2a8bd10c', variable: 'TENANT')
                     ]) {
                         bat '''
                             az login --service-principal -u %APP_ID% -p %PASSWORD% --tenant %TENANT%
@@ -74,7 +74,9 @@ pipeline {
         stage('Get AKS Cluster Credentials') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'aeedb859-2ae2-451a-91e5-ac4dc88c0b8b', variable: 'SUBSCRIPTION_ID')]) {
+                    withCredentials([
+                        string(credentialsId: 'aeedb859-2ae2-451a-91e5-ac4dc88c0b8b', variable: 'SUBSCRIPTION_ID')
+                    ]) {
                         bat '''
                             az aks get-credentials --resource-group "rmsJobGroup" --name "rmsAKSCluster" --overwrite-existing --subscription %SUBSCRIPTION_ID%
                         '''
