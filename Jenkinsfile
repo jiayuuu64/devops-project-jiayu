@@ -10,17 +10,13 @@ pipeline {
             steps {
                 bat '''
                     npm install
-                    npm audit fix || echo "Some vulnerabilities could not be fixed automatically. Proceeding with caution."
+                    npm audit fix
                 '''
             }
         }
         stage('Update Outdated Packages') {
             steps {
-                bat '''
-                    npm install -g npm-check-updates
-                    ncu -u
-                    npm install
-                '''
+                bat 'npm install -g npm-check-updates'
             }
         }
         stage('Run Backend Mocha Tests') {
@@ -83,16 +79,16 @@ pipeline {
         stage('Verify Kubernetes Deployment') {
             steps {
                 bat '''
-                    kubectl rollout history deployment/rms-deployment
-                    kubectl get pods
+                    kubectl rollout status deployment/rms-deployment
                     kubectl get services
+                    kubectl get pods
                 '''
             }
         }
     }
     post {
         always {
-            echo 'Pipeline execution completed.'
+            echo 'This will always run'
         }
         failure {
             mail to: 'jiayu.wong42@gmail.com',
