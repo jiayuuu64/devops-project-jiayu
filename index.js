@@ -10,6 +10,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
  
+const statusMonitor = require('express-status-monitor');
+app.use(statusMonitor());
+
 // Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECT)
 
